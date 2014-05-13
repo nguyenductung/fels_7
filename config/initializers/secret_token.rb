@@ -9,4 +9,21 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Fels7::Application.config.secret_key_base = 'dc0b8202341990d43d325ac680ffbfc35f7eee08f3d2a1b426ee6cff57b331a6a67a52761e50f1c5393093f598224a81a5743197fb986b38c556cd14a1d20929'
+#Fels7::Application.config.secret_key_base = 'dc0b8202341990d43d325ac680ffbfc35f7eee08f3d2a1b426ee6cff57b331a6a67a52761e50f1c5393093f598224a81a5743197fb986b38c556cd14a1d20929'
+
+require 'securerandom'
+
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
+Fels7::Application.config.secret_key_base = secure_token
