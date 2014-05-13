@@ -1,0 +1,19 @@
+<% if !@user.nil? %>
+  <% provide(:title, @user.name) %>
+  <div class="row">
+    <aside class="span4">
+      <section>
+        <h1>
+          <%= gravatar_for @user %>
+          <%= @user.name %>
+        </h1>
+      </section>
+    </aside>
+    <div class="span8">
+    
+    </div>
+  </div>
+<% else %>
+  <% provide(:title, "User not found") %>
+  <h3>User not found.</h3>
+<% end %>
