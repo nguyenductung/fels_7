@@ -4,8 +4,35 @@
       <%= link_to "Framgia E-Learning", root_path, id: "logo" %>
       <nav>
         <ul class="nav pull-right">
-          <li><%= link_to "Home", root_path %></li> 
-          <li><%= link_to "Sign in", '#' %></li>
+          <li><%= link_to "Home", root_path %></li>
+          <% if signed_in? %>
+            <li><%= link_to "Users", users_path %></li>
+            <li id="fat-menu" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <%= current_user.name %>
+                <% if current_user.admin? %> 
+                  (Admin)
+                <% end %>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href=<%= user_path(current_user) %>><i class="icon-user"></i> Profile</a>
+                </li>
+                <li>
+                  <a href=<%= edit_user_path(current_user) %>><i class="icon-edit"></i> Update profile</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                  <%= link_to(signout_path, method: "delete") do %>
+                    <i class="icon-off"></i> Sign out
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%= link_to "Sign in", signin_path %></li>
+          <% end %>
         </ul>
       </nav>
     </div>

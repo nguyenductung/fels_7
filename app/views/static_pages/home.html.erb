@@ -1,6 +1,23 @@
 <% provide(:title, 'Home') %>
-<div class="center hero-unit">
-  <h1>Welcome to Framgia E-Learning System</h1>
-  <br/>
-  <%= link_to "Sign up now!", '#', class: "btn btn-large btn-primary" %>
-</div>
+<% if signed_in? %>
+  <div class="row">
+    <aside class="span4">
+      <section>
+        <%= render 'shared/user_info' %>
+      </section>
+      <section>
+        
+      </section>
+    </aside>
+    <div class="span8">
+      
+    </div>
+  </div>
+<% else %>
+  <div class="center hero-unit">
+    <h1>Welcome to</h1>
+    <h1>Framgia E-Learning System</h1>
+  	<br/>
+  	<%= link_to "Sign up now!", signup_path, class: "btn btn-large btn-primary" %>
+  </div>
+<% end %>
