@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :signed_in_user,
                 only: [:index, :edit, :update, :destroy, :following, :followers]
-  before_action :admin_user, only: :destroy
   before_action :correct_user, only: [:edit, :update]
 
   def index
@@ -23,7 +22,7 @@ class UsersController < ApplicationController
       flash[:success] = "Welcome to Framgia E-Learning System!"
       redirect_to @user
     else
-      render 'new'
+      render "new"
     end
   end
 
@@ -37,12 +36,27 @@ class UsersController < ApplicationController
       flash[:success] = "Profile updated"
       redirect_to @user
     else
-      render 'edit'
+      render "edit"
     end
   end
   
   def destroy
-    
+  end
+
+  def following
+    @title = "Following"
+    @user = User.find_by id: params[:id]
+    @allusers = @user.followed_users unless @user.nil?
+    @users = @user.followed_users.paginate page: params[:page], per_page: 3 unless @user.nil?
+    render "show_follow"
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find_by id: params[:id]
+    @allusers = @user.followers unless @user.nil?
+    @users = @user.followers.paginate page: params[:page], per_page: 3 unless @user.nil?
+    render "show_follow"
   end
 
   private
