@@ -1,0 +1,22 @@
+<li id="<%= @lesson_words.index(lesson_word) %>" class="lesson-words">
+  <div class="row" >
+    <h3 class="center">
+      <%= @lesson_words.index(lesson_word) + 1 %> / <%= @lesson_words.count %>
+    </h3>
+    <br/>
+    <div class="span3 offset2 word">
+      <%= lesson_word.content %>
+    </div>
+    <div class="span3">
+      <ul>
+        <% lesson_word.options.order(:content).each do |option| %>
+          <div class="form-inline option">
+            <% checked = option.id == cookies.permanent["answers#{lesson_word.id}"].to_i %>
+            <%= radio_button_tag "answers[#{lesson_word.id}]", option.id, checked %>
+            <%= label_tag(:answer, option.content) %>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</li>

@@ -76,7 +76,7 @@ words = [
   [ "きつね", "cáo" ],
   [ "らくだ", "lạc đà" ],
   [ "はと", "chim bồ câu" ],
-  [ "へび", "con rắn" ],
+  [ "へび", "rắn" ],
   [ "ほたる", "đom đóm" ],
   [ "はえ", "ruồi" ],
   [ "あり", "kiến" ],
@@ -103,11 +103,13 @@ words.each do |word|
 end
 
 2.times do |n|
-  lesson = Lesson.create(user_id: 1, category_id: category_id)
+  lesson = Lesson.new(user_id: 1, category_id: category_id)
   words = Word.where(category_id: category_id).sample(20)
   words.each do |word|
     option = word.options.sample
-    Answer.create(user_id: 1, word_id: word.id, option_id: option.id, lesson_id: lesson.id)
+    #Answer.new(user_id: 1, word_id: word.id, option_id: option.id, lesson_id: lesson.id)
+    lesson.answers.build(user_id: 1, word_id: word.id, option_id: option.id)
+  lesson.save  
   end
 end
 
@@ -160,9 +162,10 @@ words.each do |word|
   end
 end
 
-lesson = Lesson.create(user_id: 1, category_id: category_id)
+lesson = Lesson.new(user_id: 1, category_id: category_id)
 words = Word.where(category_id: category_id).sample(20)
 words.each do |word|
   option = word.options.sample
-  Answer.create(user_id: 1, word_id: word.id, option_id: option.id, lesson_id: lesson.id)
+  lesson.answers.build(user_id: 1, word_id: word.id, option_id: option.id)
+lesson.save 
 end

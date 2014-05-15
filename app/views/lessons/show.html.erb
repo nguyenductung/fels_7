@@ -1,0 +1,15 @@
+<% provide(:title, 'Lesson') %>
+
+<% unless @lesson.nil? %>
+  <h1>Category: <%= @category.name %></h1>
+  <h3 class="center">Score: <%= @lesson.score %> / <%= @lesson.answers.count %></h3>
+  <div class="row">
+    <div class="span8 offset2">
+      <ul class="results">
+        <%= render partial: 'result_word', collection: @result_words %>
+      </ul> 
+    </div>
+  </div>
+<% else %>
+  <h3>Lesson not found.</h3>
+<% end %>
