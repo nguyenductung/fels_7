@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_tag words_path, method: 'get' do %>
+      <div class="center">
+        Category
+        <p></p>
+      </div>
+      <%= select_tag :category_id,
+                     options_from_collection_for_select(Category.all,
+                                                        "id",
+                                                        "name"),
+                     include_blank: true %>
+      <div class="center form-inline">
+        <%= radio_button_tag :word_type, "learned" %>
+        <%= label_tag(:learned, "Learned") %>
+        <%= radio_button_tag :word_type, "not_learned" %>
+        <%= label_tag(:not_learned, "Not learned") %>
+        <%= radio_button_tag :word_type, "all", true %>
+        <%= label_tag(:all, "All") %>
+      </div>
+      <div class="center">
+        <%= submit_tag 'Filter', name: nil, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

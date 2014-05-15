@@ -10,7 +10,10 @@
       </section>
       <section>
         <%= render "shared/stats" %>
-    </section>
+      </section>
+      <section>
+        Learned <%= pluralize(@user.words.distinct.count, "word") %>
+      </section>
     </aside>
     <div class="span8">
       <%= render "follow_form" if signed_in? %>
