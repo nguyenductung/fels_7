@@ -8,10 +8,13 @@
       <section>
         <%= render "shared/stats" %>
       </section>
+      <section>
+        Learned <%= pluralize(current_user.words.distinct.count, "word") %>
+      </section>
     </aside>
     <div class="span8">
       <div class="span3">
-      <%= link_to "Words", '#', class: "btn btn-large btn-block btn-primary" %>
+      <%= link_to "Words", words_path, class: "btn btn-large btn-block btn-primary" %>
       </div>
       <div class="span3">
       <%= link_to "Lesson", '#', class: "btn btn-large btn-block btn-primary" %>

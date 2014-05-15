@@ -1,0 +1,11 @@
+<% provide(:title, 'Word list') %>
+<h1>Word list</h1>
+
+<div class="filter-form">
+  <%= render "filter_form" %>
+</div>
+<ul class="words">
+  <%= render @words %>
+</ul>
+
+<%= will_paginate %>
