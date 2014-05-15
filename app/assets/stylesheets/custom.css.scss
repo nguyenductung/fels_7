@@ -219,6 +219,32 @@ input {
   }
 }
 
+/* Categories index */
+
+.categories {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
+  .title {
+    display: block;
+    font-size: x-large;
+    margin-bottom: 5px;
+  }
+  .stats {
+    display: block;
+    font-size: smaller;
+    color: $grayLight;
+    margin: 5px 0 5px 0;  
+  }
+}
+
 /* filter-form */
 .center {
   text-align: center;
