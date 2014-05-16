@@ -1,0 +1,23 @@
+<li>
+  <div class="row" >
+    <div class="span3 offset2 word">
+      <%= result_word.content %>
+    </div>
+    <div class="span3">
+      <% result_word.options.order(:content).each do |option| %>
+        <div class="form-inline option">
+          <% checked = @answers.find_by(word_id: result_word.id).option_id == option.id %>
+          <% if option.is_correct %>
+            <% option_class = "true" %>
+          <% else %>
+            <% if @answers.find_by(word_id: result_word.id).option_id == option.id %>
+              <% option_class = "false" %>
+            <% end %>
+          <% end %>
+          <%= radio_button_tag "", option.id, checked, disabled: true %>
+          <%= label_tag "", option.content, class: option_class %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</li>

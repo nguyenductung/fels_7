@@ -3,8 +3,13 @@ class WordsController < ApplicationController
 
   def index
     if !params[:word_type].nil? && !params[:category_id].nil?
-      category = Category.find_by id: params[:category_id]
-      @words = category.words
+      if params[:category_id].empty?
+        @words = Word.all
+      else
+        category = Category.find_by id: params[:category_id]
+        @words = category.words
+      end
+        
       if params[:word_type] == "learned"
         @words = @words.learned_by current_user
       elsif params[:word_type] == "not_learned"

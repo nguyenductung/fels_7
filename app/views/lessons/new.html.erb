@@ -1,0 +1,66 @@
+<% provide(:title, 'New lesson') %>
+<% if @lesson_words.any? %>
+  <h1>New lesson</h1>
+  <div class="row">
+    <div class="span8 offset2">
+      <%= form_for(@lesson) do |f| %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :category_id, value: params[:category_id] %>
+        <ul class="lessons">
+          <%= render partial: 'lesson_word', collection: @lesson_words %>
+        </ul>
+        <br/>
+        <div class="center">
+          <div class="btn btn-large btn-primary" id="back-button">Back</div>
+          <div class="btn btn-large btn-primary" id="next-button">Next</div>
+          <%= f.submit "Submit", class: "btn btn-large btn-primary", id: "submit-button" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    $("#submit-button").hide();
+    $("#back-button").hide();
+    $(".lesson-words").hide();
+    $("#0").show();
+    
+    var id = 0;
+    var max = <%= @lesson_words.count - 1 %>;
+    
+    $("#next-button").click(function() {
+      id++;
+      $(".lesson-words").hide();
+      if (0 <= id && id <= max) {
+        $("#"+id.toString()).show();  
+        if (id == max) {
+          $(this).hide();
+          $("#submit-button").show();
+        };
+        if (id > 0) {
+          $("#back-button").show();
+        };
+      }
+    });
+    
+    $("#back-button").click(function() {
+      id--;
+      $(".lesson-words").hide();
+      if (0 <= id && id <= max) {
+        $("#"+id.toString()).show();
+        $("#submit-button").hide();
+        $("#next-button").show();
+        if (id == 0) {
+          $(this).hide();
+        };
+      }
+    });
+
+    $("input[type=radio]").on("click",function() {
+      var name = "answers" + this.name.split("[")[1].split("]")[0];
+      document.cookie = name + "=" + this.value + "; path=/";
+    });
+  </script>
+<% else %>
+  <h3>No words in this category</h3>
+<% end %>

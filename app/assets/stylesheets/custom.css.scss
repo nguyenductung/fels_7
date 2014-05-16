@@ -249,3 +249,41 @@ input {
 .center {
   text-align: center;
 }
+
+.lessons {
+  list-style: none;
+  margin: 0;
+}
+
+.results {
+  margin: 0;
+  li {
+    overflow: auto;
+    border-top: 1px solid $grayLighter;
+
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+      padding-bottom: 10px;
+    }
+
+  }
+}
+
+.word {
+  display: block;
+  font-size: x-large;
+  margin-top: 10px;
+}
+
+.option {
+  display: block;
+  &:last-child {
+    margin-bottom: 15px;
+  }
+  .true {
+    color: green;
+  }
+  .false {
+    color: red;
+  }
+}

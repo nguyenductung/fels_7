@@ -13,6 +13,11 @@ module SessionsHelper
     current_user.update_attributes remember_token: User.digest(User.new_remember_token)
     current_user.no_password_validation = false
     cookies.delete(:remember_token)
+    cookies.delete(:words)
+    cookies.delete(:category)
+    cookies.each do |key, value|
+      cookies.delete key if key.start_with?("answers")
+    end
     self.current_user = nil
   end
   

@@ -8,6 +8,7 @@ Fels7::Application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :words, only: [:index]
   resources :categories, only: [:index]
+  resources :lessons, only: [:new, :create, :show]
 
   root  'static_pages#home'
   match '/help',    to: 'static_pages#help',    via: 'get'
