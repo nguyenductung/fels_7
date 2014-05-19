@@ -4,9 +4,10 @@
     <aside class="span4">
       <section>
         <h1>
-          <%= gravatar_for @user %>
-          <%= @user.name %>
+          <div id="avatar"><%= gravatar_for @user %></div>
+          <div id="username"><%= @user.name %></div>
         </h1>
+        <a href="#update-profile" role="button" class="btn btn-mini" data-toggle="modal">Update profile</a>
       </section>
       <section>
         <%= render "shared/stats" %>
@@ -23,3 +24,37 @@
   <% provide(:title, "User not found") %>
   <h3>User not found.</h3>
 <% end %>
+
+<div id="update-profile" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Update profile</h3>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="span4">
+        <%= form_for(current_user, html: { method: :post },
+                                   remote: true) do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <input name="_method" type="hidden" value="patch" />
+          <%= f.label :name %>
+          <%= f.text_field :name %>
+
+          <%= f.label :email %>
+          <%= f.text_field :email %>
+
+          <%= f.label :password %>
+          <%= f.password_field :password %>
+
+          <%= f.label :password_confirmation, "Confirm Password" %>
+          <%= f.password_field :password_confirmation %>
+
+          <%= f.submit "Save changes", class: "btn btn-primary" %>
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <% end %>
+        <%= gravatar_for current_user %>
+        <a href="http://gravatar.com/emails">Change</a>
+      </div>
+    </div>
+  </div>
+</div>
