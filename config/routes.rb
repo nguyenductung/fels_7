@@ -17,7 +17,10 @@ Fels7::Application.routes.draw do
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
-  
+  match '/csvs',    to: 'csvs#index',           via: 'get'
+  match "csvs/import", to: "csvs#import",       via: :post
+  match "csvs/export", to: "csvs#export",       via: :get
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

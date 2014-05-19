@@ -23,6 +23,12 @@
                 <li>
                   <a href=<%= edit_user_path(current_user) %>><i class="icon-edit"></i> Update profile</a>
                 </li>
+                <% if current_user.admin? %>
+                  <li class="divider"></li>
+                  <li>
+                    <a href=<%= csvs_path %>><i class="icon-th-list"></i> Data management</a>
+                  </li>
+                <% end %>
                 <li class="divider"></li>
                 <li>
                   <%= link_to(signout_path, method: "delete") do %>
