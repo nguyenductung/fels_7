@@ -1,0 +1,17 @@
+<li>
+  <div class="row">
+    <div class="span4 offset1">
+      <div class="title">
+        <%= model.name %>
+      </div>
+    </div>
+    <div class="span3">  
+      <%= form_tag csvs_import_path, multipart: true do %>
+        <%= submit_tag "Import", class: "btn btn-primary" %>
+        <div class="btn btn-default btn-file">Browse<input type="file", name="file"></div>
+        <%= hidden_field_tag :model, model.name %>
+      <% end %>
+      <%= link_to "Export", csvs_export_path(model: model.name) ,class: "btn btn-primary" %>
+    </div>
+  </div>
+</li>

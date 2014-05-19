@@ -1,0 +1,10 @@
+<% provide(:title, 'Data Management') %>
+<h1>Data Management</h1>
+
+<div class="row">
+  <div class="span8 offset2">
+    <ul class="models">
+      <%= render partial: 'model', collection: @models %>
+    </ul>
+  </div>
+</div>
